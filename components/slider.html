@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<link rel="stylesheet" href="./base.css" />
+	</head>
+	<body>
+		<!-- Слайдер -->
+		<style>
+			@import url('https://fonts.googleapis.com/css2?family=Cormorant+Infant:wght@600&display=swap');
+			.slider__wrapper {
+				background-color: #efefef;
+				height: 600px;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+			.slider__container {
+				display: flex;
+				flex-direction: column;
+				gap: 15px;
+				height: 100%;
+			}
+			.slider__item {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				gap: 75px;
+				height: 100%;
+				opacity: 0;
+				transition: 0.5s ease-in opacity;
+			}
+			.slider__item.active {
+				opacity: 1;
+			}
+			.slider__img {
+				display: block;
+				padding-right: 40px;
+				height: 75%;
+				aspect-ratio: 1/1;
+				object-fit: cover;
+			}
+			.slider__item .slider__title {
+				font-family: 'Cormorant Infant', serif;
+				font-weight: 600;
+				text-transform: uppercase;
+				font-size: 96px;
+				line-height: 100px;
+			}
+
+			.slider__dots {
+				margin: 0 auto;
+				display: flex;
+				gap: 16px;
+				padding-bottom: 40px;
+			}
+
+			.slider__dot {
+				position: relative;
+				width: 30px;
+				height: 30px;
+				cursor: pointer;
+			}
+			.slider__outer-circle {
+				position: absolute;
+				display: none;
+				left: 0;
+				top: 0;
+				width: 30px;
+				height: 30px;
+				border-radius: 100%;
+				background-color: #c9d1b1;
+				z-index: 1;
+			}
+			.slider__dot:hover > .slider__outer-circle {
+				display: block;
+			}
+			.slider__inner-circle.active ~ .slider__outer-circle {
+				display: block;
+			}
+			.slider__inner-circle {
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				transform: translate(-50%, -50%);
+				width: 6px;
+				height: 6px;
+				border-radius: 100%;
+				background-color: #abb0ba;
+				z-index: 2;
+			}
+			.slider__inner-circle.active {
+				background-color: #747b5a;
+				z-index: 2;
+			}
+		</style>
+
+		<div class="u-custom slider__wrapper">
+			<div class="u-container slider__container">
+				<!-- Элемент слайдера СТАРТ -->
+				<div class="slider__item">
+					<h1 class="slider__title">Полки для обуви</h1>
+					<img
+						src="https://upload.wikimedia.org/wikipedia/en/3/3d/Longcat_is_loooooooooong.jpg"
+						alt="Полки для обуви"
+						class="slider__img"
+					/>
+				</div>
+				<!-- Элемент сладера КОНЕЦ -->
+
+				<!-- Элемент слайдера СТАРТ -->
+				<div class="slider__item">
+					<h1 class="slider__title">Стулья</h1>
+					<img
+						src="https://placehold.it/200x200"
+						alt="Стулья"
+						class="slider__img"
+					/>
+				</div>
+				<!-- Элемент сладера КОНЕЦ -->
+
+				<div class="slider__dots">
+					<!-- Отрисовка через JS, это скелет -->
+					<!-- <div class="slider__dot">
+						<div class="slider__inner-circle active"></div>
+						<div class="slider__outer-circle"></div>
+					</div> -->
+				</div>
+			</div>
+		</div>
+
+		<script>
+			const sliderItems = document.querySelectorAll('.slider__item');
+			const sliderDotsContainer = document.querySelector('.slider__dots');
+
+			// отрисовываем точки для количества элементов
+			sliderItems.forEach((e, index) => {
+				const dot = document.createElement('div');
+				dot.classList.add('slider__dot');
+
+				const innerCircle = document.createElement('div');
+				innerCircle.classList.add('slider__inner-circle');
+
+				const outerCircle = document.createElement('div');
+				outerCircle.classList.add('slider__outer-circle');
+
+				dot.appendChild(innerCircle);
+				dot.appendChild(outerCircle);
+
+				// добавляем эвент листенер на точку
+				dot.addEventListener('click', () => changeSlide(index));
+				sliderDotsContainer.appendChild(dot);
+
+				// скрываем все элементы слайдера
+				sliderItems[index].style.display = 'none';
+				sliderItems[index].classList.remove('active');
+			});
+
+			// устанавливаем видимость первого элемента
+			sliderItems[0].style.display = 'flex';
+			const dots = sliderDotsContainer.querySelectorAll('.slider__dot');
+			dots[0].querySelector('.slider__inner-circle').classList.add('active');
+			setTimeout(() => {
+				sliderItems[0].classList.add('active');
+			}, 50);
+
+			// обработчик нажатия
+			function changeSlide(slideIndex) {
+				// убирает видимость всех элементов и активных точек
+				for (let i = 0; i < sliderItems.length; i++) {
+					sliderItems[i].style.display = 'none';
+					sliderItems[i].classList.remove('active');
+					const dots = sliderDotsContainer.querySelectorAll('.slider__dot');
+					dots[i]
+						.querySelector('.slider__inner-circle')
+						.classList.remove('active');
+				}
+
+				// устанавливает видимость нужного элемента
+				sliderItems[slideIndex].style.display = 'flex';
+				const dots = sliderDotsContainer.querySelectorAll('.slider__dot');
+				dots[slideIndex]
+					.querySelector('.slider__inner-circle')
+					.classList.add('active');
+				setTimeout(() => {
+					sliderItems[slideIndex].classList.add('active');
+				}, 50);
+			}
+		</script>
+	</body>
+</html>

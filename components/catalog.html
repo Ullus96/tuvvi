@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<link rel="stylesheet" href="./base.css" />
+	</head>
+	<body>
+		<style>
+			.catalog__items {
+				display: grid;
+				grid-template-columns: repeat(3, calc(100% / 3 - 20px + 20px / 3));
+				gap: 20px;
+			}
+
+			.catalog__card {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				overflow: hidden;
+				position: relative;
+			}
+
+			.catalog__card:hover > .catalog__img-wrapper img {
+				transform: scale(1.12);
+			}
+
+			.catalog__card:hover > h2 {
+				color: #747b5a;
+				text-decoration: underline;
+			}
+
+			.catalog__img-wrapper {
+				width: 100%;
+				overflow: hidden;
+				margin-bottom: 20px;
+			}
+
+			.catalog__card img {
+				display: block;
+				width: 100%;
+				aspect-ratio: 1/1;
+				object-fit: cover;
+			}
+
+			.catalog__card h2 {
+				margin-bottom: 10px;
+			}
+
+			.catalog__desc {
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: center;
+				gap: 0 10px;
+				color: #abb0ba;
+			}
+
+			.catalog__card-cover {
+				display: block;
+				z-index: 1;
+				position: absolute;
+				inset: 0;
+			}
+		</style>
+		<div class="u-custom u-mt-l">
+			<div class="u-container">
+				<h1 class="u-mb-m">Каталог</h1>
+				<div class="catalog__items">
+					<div class="catalog__card">
+						<!-- Тут в href="" вставить ссылку на страницу с товарами этой категории -->
+						<a href="#" class="catalog__card-cover">&nbsp;</a>
+						<div class="catalog__img-wrapper">
+							<!-- URL-ссылка на картинку (vk, imgur) -->
+							<img src="https://via.placeholder.com/500x200" alt="#" />
+						</div>
+						<h2>Аксессуары</h2>
+						<div class="catalog__desc">
+							<p>Сумки</p>
+							<p>Ремни</p>
+						</div>
+					</div>
+
+					<div class="catalog__card">
+						<!-- Тут в href="" вставить ссылку на страницу с товарами этой категории -->
+						<a href="#" class="catalog__card-cover">&nbsp;</a>
+						<div class="catalog__img-wrapper">
+							<!-- URL-ссылка на картинку (vk, imgur) -->
+							<img src="https://via.placeholder.com/230x230" alt="#" />
+						</div>
+						<h2>Для дома</h2>
+						<div class="catalog__desc">
+							<p>Ковры</p>
+							<p>Корзины</p>
+							<p>Пуфы</p>
+						</div>
+					</div>
+
+					<div class="catalog__card">
+						<!-- Тут в href="" вставить ссылку на страницу с товарами этой категории -->
+						<a href="#" class="catalog__card-cover">&nbsp;</a>
+						<div class="catalog__img-wrapper">
+							<!-- URL-ссылка на картинку (vk, imgur) -->
+							<img src="https://via.placeholder.com/280x280" alt="#" />
+						</div>
+						<h2>Мастер-классы</h2>
+						<div class="catalog__desc">
+							<p>Сумки</p>
+							<p>Ковры</p>
+							<p>Корзины</p>
+							<p>Пуфы</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
