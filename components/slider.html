@@ -23,6 +23,7 @@
 				gap: 15px;
 				height: 100%;
 			}
+
 			.slider__item {
 				display: flex;
 				justify-content: space-between;
@@ -31,10 +32,18 @@
 				height: 100%;
 				opacity: 0;
 				transition: 0.5s ease-in opacity;
+				position: relative;
 			}
+
 			.slider__item.active {
 				opacity: 1;
 			}
+
+			.slider__link {
+				position: absolute;
+				inset: 30px 0 30px;
+			}
+
 			.slider__img {
 				display: block;
 				padding-right: 40px;
@@ -71,7 +80,7 @@
 				width: 30px;
 				height: 30px;
 				border-radius: 100%;
-				background-color: #c9d1b1;
+				background-color: #e4e8d8;
 				z-index: 1;
 			}
 			.slider__dot:hover > .slider__outer-circle {
@@ -91,9 +100,15 @@
 				background-color: #abb0ba;
 				z-index: 2;
 			}
+			.slider__inner-circle:hover {
+				color: #babdad;
+			}
 			.slider__inner-circle.active {
 				background-color: #747b5a;
 				z-index: 2;
+			}
+			.slider__outer-circle.active {
+				background-color: #c9d1b1;
 			}
 		</style>
 
@@ -101,7 +116,22 @@
 			<div class="u-container slider__container">
 				<!-- Элемент слайдера СТАРТ -->
 				<div class="slider__item">
+					<a href="/accessories/bags" class="slider__link"> </a>
+					<h1 class="slider__title">Сумки</h1>
+					<!-- Смена картинки тут -->
+					<img
+						src="https://github.com/Ullus96/tuvvi/blob/main/img/sm4.jpg?raw=true"
+						alt="Сумки"
+						class="slider__img"
+					/>
+				</div>
+				<!-- Элемент сладера КОНЕЦ -->
+
+				<!-- Элемент слайдера СТАРТ -->
+				<div class="slider__item">
+					<a href="#" class="slider__link"> </a>
 					<h1 class="slider__title">Полки для обуви</h1>
+					<!-- Смена картинки тут -->
 					<img
 						src="https://upload.wikimedia.org/wikipedia/en/3/3d/Longcat_is_loooooooooong.jpg"
 						alt="Полки для обуви"
@@ -112,7 +142,9 @@
 
 				<!-- Элемент слайдера СТАРТ -->
 				<div class="slider__item">
+					<a href="#" class="slider__link"> </a>
 					<h1 class="slider__title">Стулья</h1>
+					<!-- Смена картинки тут -->
 					<img
 						src="https://placehold.it/200x200"
 						alt="Стулья"
@@ -125,7 +157,7 @@
 					<!-- Отрисовка через JS, это скелет -->
 					<!-- <div class="slider__dot">
 						<div class="slider__inner-circle active"></div>
-						<div class="slider__outer-circle"></div>
+						<div class="slider__outer-circle active"></div>
 					</div> -->
 				</div>
 			</div>
@@ -162,6 +194,7 @@
 			sliderItems[0].style.display = 'flex';
 			const dots = sliderDotsContainer.querySelectorAll('.slider__dot');
 			dots[0].querySelector('.slider__inner-circle').classList.add('active');
+			dots[0].querySelector('.slider__outer-circle').classList.add('active');
 			setTimeout(() => {
 				sliderItems[0].classList.add('active');
 			}, 50);
@@ -176,6 +209,9 @@
 					dots[i]
 						.querySelector('.slider__inner-circle')
 						.classList.remove('active');
+					dots[i]
+						.querySelector('.slider__outer-circle')
+						.classList.remove('active');
 				}
 
 				// устанавливает видимость нужного элемента
@@ -183,6 +219,9 @@
 				const dots = sliderDotsContainer.querySelectorAll('.slider__dot');
 				dots[slideIndex]
 					.querySelector('.slider__inner-circle')
+					.classList.add('active');
+				dots[slideIndex]
+					.querySelector('.slider__outer-circle')
 					.classList.add('active');
 				setTimeout(() => {
 					sliderItems[slideIndex].classList.add('active');
