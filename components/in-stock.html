@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<link rel="stylesheet" href="./base.css" />
+	</head>
+	<body>
+		<!-- Для замены даты внутри через Ctrl + F ищи "заменить дату" -->
+		<style>
+			.in-stock__background {
+				background-color: #c9d1b1;
+			}
+
+			.in-stock__container {
+				text-align: center;
+				padding: 10px 0;
+			}
+		</style>
+		<div class="u-custom in-stock__background">
+			<div class="u-container in-stock__container">
+				<p class="in-stock__description">
+					Заказы принимаются в работу <b>в порядке очереди</b>, начиная с самых
+					ранних. Ближайшее возможное время изготовления заказа
+					<span id="stock-nearest-date">июнь 2024</span>.
+				</p>
+			</div>
+		</div>
+		<script>
+			// Внутри одинарных кавычек заменить дату в формате именительного падежа
+			const nearestDate = 'декабрь 2024';
+			// ---
+			const nearestDateEl = document.querySelector('#stock-nearest-date');
+			nearestDateEl.innerHTML = nearestDate;
+		</script>
+	</body>
+</html>

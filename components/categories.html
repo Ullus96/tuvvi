@@ -85,11 +85,19 @@
 				}
 			}
 
+			@media screen and (max-width: 639px) {
+				.category__items {
+					display: grid;
+					grid-template-columns: repeat(2, calc(100% / 2 - 20px + 20px / 2));
+					gap: 20px;
+				}
+			}
+
 			@media screen and (max-width: 479px) {
 				.category__items {
 					display: grid;
 					grid-template-columns: repeat(1, 100%);
-					gap: 40px;
+					gap: 20px;
 				}
 
 				.category__card:nth-child(n) {

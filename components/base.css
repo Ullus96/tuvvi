@@ -45,13 +45,14 @@ h2 {
 
 @media screen and (max-width: 639px) {
 	.u-container {
-		width: 480px;
+		width: 100%;
+		/* width: 480px; */
 	}
 }
 
 @media screen and (max-width: 479px) {
 	.u-container {
-		width: 320px;
+		width: 100%;
 	}
 }
 
@@ -89,4 +90,18 @@ h2 {
 
 .u-mb-m {
 	margin-bottom: 40px;
+}
+
+.u-btn {
+	text-decoration: none;
+	font-family: inherit;
+	font-size: inherit;
+	color: inherit;
+	background: transparent;
+	outline: none;
+	border: none;
+}
+
+.u-btn:focus {
+	outline: 2px solid #c9d1b1;
 }

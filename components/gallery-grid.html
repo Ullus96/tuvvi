@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<link rel="stylesheet" href="./base.css" />
+	</head>
+	<body>
+		<style>
+			body {
+				position: relative;
+			}
+
+			.gallery-grid {
+				display: flex;
+				flex-direction: column;
+				gap: 20px;
+			}
+			.gallery-grid__row {
+				display: grid;
+				grid-template-columns: 1fr 1fr 1fr;
+				gap: 20px;
+			}
+
+			.gallery-grid__row img {
+				display: block;
+				width: 100%;
+				object-fit: cover;
+				cursor: zoom-in;
+			}
+
+			.gallery-grid--square img {
+				aspect-ratio: 1/1;
+			}
+			.gallery-grid--tall img {
+				aspect-ratio: 3/4;
+			}
+
+			.gallery-pop-up__wrapper {
+				position: fixed;
+				inset: 0 0 0 0;
+				background-color: #fff;
+				display: none;
+			}
+			.gallery-pop-up__wrapper.visible {
+				display: block;
+			}
+
+			.gallery-pop-up__wrapper img {
+				display: block;
+				position: fixed;
+				left: 50%;
+				top: 50%;
+				transform: translate(-50%, -50%);
+				height: 95vh;
+				background-color: red;
+				padding: 20px 30px;
+			}
+
+			.gallery__btn-left,
+			.gallery__btn-right,
+			.gallery__close-btn {
+				cursor: pointer;
+				padding: 6px 12px;
+				font-size: 30px;
+			}
+
+			.gallery__close-btn {
+				position: absolute;
+				top: 10px;
+				right: 10px;
+			}
+
+			.gallery__btn-left {
+				position: absolute;
+				left: 10px;
+				top: 50%;
+				transform: translateY(-50%);
+			}
+
+			.gallery__btn-right {
+				position: absolute;
+				right: 10px;
+				top: 50%;
+				transform: translateY(-50%);
+			}
+		</style>
+		<div class="u-custom">
+			<!-- Поп-ап -->
+			<div class="gallery-pop-up__wrapper">
+				<img src="https://placehold.it/340x340" alt="" />
+				<button class="u-btn gallery__close-btn">&#10006;</button>
+				<button class="u-btn gallery__btn-left">&#8592;</button>
+				<button class="u-btn gallery__btn-right">&#8594;</button>
+			</div>
+			<!-- Сам контент галереи -->
+			<div class="u-container">
+				<div class="gallery-grid">
+					<!-- row (square) start -->
+					<div class="gallery-grid__row gallery-grid--square">
+						<div class="gallery-grid__item">
+							<img
+								src="https://images.pexels.com/photos/8123680/pexels-photo-8123680.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+								alt="#"
+							/>
+						</div>
+						<div class="gallery-grid__item">
+							<img
+								src="https://images.pexels.com/photos/346529/pexels-photo-346529.jpeg?auto=compress&cs=tinysrgb&w=1600"
+								alt="#"
+							/>
+						</div>
+						<div class="gallery-grid__item">
+							<img src="https://placehold.it/340x340" alt="#" />
+						</div>
+					</div>
+					<!-- row end -->
+					<!-- row (tall) start -->
+					<div class="gallery-grid__row gallery-grid--tall">
+						<div class="gallery-grid__item">
+							<img src="https://placehold.it/340x450" alt="#" />
+						</div>
+						<div class="gallery-grid__item">
+							<img src="https://placehold.it/340x450" alt="#" />
+						</div>
+						<div class="gallery-grid__item">
+							<img src="https://placehold.it/340x450" alt="#" />
+						</div>
+					</div>
+					<!-- row end -->
+					<!-- row (square) start -->
+					<div class="gallery-grid__row gallery-grid--square">
+						<div class="gallery-grid__item">
+							<img
+								src="https://images.pexels.com/photos/8123680/pexels-photo-8123680.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+								alt="#"
+							/>
+						</div>
+						<div class="gallery-grid__item">
+							<img
+								src="https://images.pexels.com/photos/346529/pexels-photo-346529.jpeg?auto=compress&cs=tinysrgb&w=1600"
+								alt="#"
+							/>
+						</div>
+						<div class="gallery-grid__item">
+							<img src="https://placehold.it/340x340" alt="#" />
+						</div>
+					</div>
+					<!-- row end -->
+				</div>
+			</div>
+		</div>
+		<script>
+			const popUpWrapper = document.querySelector('.gallery-pop-up__wrapper');
+			const images = document.querySelectorAll('.gallery-grid__item img');
+			const popUpActiveImage = document.querySelector(
+				'.gallery-pop-up__wrapper img'
+			);
+			const closeBtn = document.querySelector('.gallery__close-btn');
+			const btnLeft = document.querySelector('.gallery__btn-left');
+			const btnRight = document.querySelector('.gallery__btn-right');
+			let currentIndex = 0;
+
+			// Функция для установки активной картинки
+			function setActiveImage(index) {
+				popUpActiveImage.src = images[index].src;
+			}
+
+			// Функция для обработки нажатия на стрелочку
+			function handleArrowClick(direction) {
+				if (direction === 'left') {
+					currentIndex = (currentIndex - 1 + images.length) % images.length;
+				} else {
+					currentIndex = (currentIndex + 1) % images.length;
+				}
+				setActiveImage(currentIndex);
+			}
+
+			images.forEach((image, index) => {
+				image.addEventListener('click', () => {
+					currentIndex = index;
+					popUpWrapper.classList.add('visible');
+					setActiveImage(currentIndex);
+				});
+			});
+
+			closeBtn.addEventListener('click', () => {
+				popUpWrapper.classList.remove('visible');
+			});
+
+			btnLeft.addEventListener('click', () => {
+				handleArrowClick('left');
+			});
+
+			btnRight.addEventListener('click', () => {
+				handleArrowClick('right');
+			});
+
+			// Обработчик для клавиши Esc
+			document.addEventListener('keydown', (event) => {
+				if (
+					event.key === 'Escape' &&
+					popUpWrapper.classList.contains('visible')
+				) {
+					popUpWrapper.classList.remove('visible');
+				}
+			});
+
+			// Обработчик для клика по области вокруг картинки
+			popUpWrapper.addEventListener('click', (event) => {
+				if (event.target === popUpWrapper) {
+					popUpWrapper.classList.remove('visible');
+				}
+			});
+
+			// Обработчики для клавиш ArrowLeft и ArrowRight
+			document.addEventListener('keydown', (event) => {
+				if (
+					event.key === 'ArrowLeft' &&
+					popUpWrapper.classList.contains('visible')
+				) {
+					handleArrowClick('left');
+				} else if (
+					event.key === 'ArrowRight' &&
+					popUpWrapper.classList.contains('visible')
+				) {
+					handleArrowClick('right');
+				}
+			});
+		</script>
+	</body>
+</html>

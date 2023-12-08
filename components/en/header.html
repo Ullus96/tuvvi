@@ -4,7 +4,7 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Document</title>
-		<link rel="stylesheet" href="./base.css" />
+		<link rel="stylesheet" href="../base.css" />
 	</head>
 	<body>
 		<style>
@@ -187,7 +187,6 @@
 			// Проверяем, если путь содержит "/en/"
 			if (currentPath.includes('/en/')) {
 				// Разделяем путь по слешам и берем второй элемент (индекс 1)
-				// В локальной версии индекс 2, т.к. components/pages
 				const languagePath = currentPath.split('/')[2];
 
 				// Получаем h2 элемент и ссылку
@@ -214,7 +213,6 @@
 						h2Element[4].textContent = 'About Me'; // About Me
 						pageLink[5].href = '#';
 						break;
-					// По сути сюда не дойдем, но пусть будет
 					default:
 						pageLink[0].href = '/'; // bird
 
