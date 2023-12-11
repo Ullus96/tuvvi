@@ -7,6 +7,8 @@
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Infant:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@500;600&display=swap');
 
 body {
 	font-family: 'Open Sans', sans-serif;
@@ -88,6 +90,10 @@ h2 {
 	margin-top: 60px;
 }
 
+.u-mb-60 {
+	margin-bottom: 60px;
+}
+
 .u-mb-m {
 	margin-bottom: 40px;
 }
@@ -104,4 +110,34 @@ h2 {
 
 .u-btn:focus {
 	outline: 2px solid #c9d1b1;
+}
+
+.u-btn--stroke {
+	border: 1px solid #c9d1b1;
+	border-radius: 50px;
+	color: #c9d1b1;
+	font-size: 16px;
+	line-height: 22px;
+	display: inline-block;
+}
+
+.u-btn--stroke:hover {
+	border: 1px solid #747b5a;
+	color: #747b5a;
+}
+
+.u-btn__link {
+	display: block;
+	padding: 12px 32px;
+	text-decoration: none;
+	color: inherit;
+}
+
+.u-btn__link span {
+	display: block;
+}
+
+.u-btn-centered {
+	display: block;
+	margin: 0 auto;
 }
